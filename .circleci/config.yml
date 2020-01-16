@@ -9,7 +9,7 @@ jobs:
           name: Lint
           command: |
             rustup toolchain install stable-x86_64-unknown-linux-gnu
-            rustup component add clippy --toolchain stable-x86_64-unknown-linux-gnu
+            rustup component add clippy
             cargo clippy
       - run:
           name: Formatted
