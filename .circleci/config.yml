@@ -7,7 +7,9 @@ jobs:
       - checkout
       - run:
           name: Lint
-          command: cargo clippy
+          command: |
+            rustup component add clippy --toolchain 1.40-x86_64-unknown-linux-gnu
+            cargo clippy
       - run:
           name: Formatted
           command: cargo fmt -- --check
