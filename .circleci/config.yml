@@ -8,11 +8,14 @@ jobs:
       - run:
           name: Lint
           command: |
+            rustup toolchain 1.40-x86_64-unknown-linux-gnu
             rustup component add clippy --toolchain 1.40-x86_64-unknown-linux-gnu
             cargo clippy
       - run:
           name: Formatted
-          command: cargo fmt -- --check
+          command: |
+            rustup component add rustfmt
+            cargo fmt -- --check
       - run:
           name: Build
           command: cargo build --all --release
