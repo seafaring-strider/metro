@@ -1,0 +1,19 @@
+version: 2
+jobs: 
+  build: 
+    docker: 
+      - image: rust:1
+    steps:
+      - checkout
+      - run:
+          name: Lint
+          command: cargo clippy
+      - run:
+          name: Formatted
+          command: cargo fmt -- --check
+      - run:
+          name: Build
+          command: cargo build --all --release
+      - run:
+          name: Test
+          command: cargo test --all --release
