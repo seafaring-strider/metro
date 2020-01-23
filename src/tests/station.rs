@@ -1,17 +1,45 @@
+#[cfg(test)]
 use crate::station::{Field, Station};
 
 #[test]
 fn station_can_report_standard_telemetry() {
     let telemetry_items = vec![
-        Field { name: String::from("temperature"), standard: true },
-        Field { name: String::from("humidity"), standard: true },
-        Field { name: String::from("dewPoint"), standard: true },
-        Field { name: String::from("windSpeed"), standard: true },
-        Field { name: String::from("windDirection"), standard: true },
-        Field { name: String::from("dailyParticipation"), standard: false },
-        Field { name: String::from("maxWindSpeed"), standard: false },
-        Field { name: String::from("highTemperature"), standard: false },
-        Field { name: String::from("lowTemperature"), standard: false },
+        Field {
+            name: String::from("temperature"),
+            standard: true,
+        },
+        Field {
+            name: String::from("humidity"),
+            standard: true,
+        },
+        Field {
+            name: String::from("dewPoint"),
+            standard: true,
+        },
+        Field {
+            name: String::from("windSpeed"),
+            standard: true,
+        },
+        Field {
+            name: String::from("windDirection"),
+            standard: true,
+        },
+        Field {
+            name: String::from("dailyParticipation"),
+            standard: false,
+        },
+        Field {
+            name: String::from("maxWindSpeed"),
+            standard: false,
+        },
+        Field {
+            name: String::from("highTemperature"),
+            standard: false,
+        },
+        Field {
+            name: String::from("lowTemperature"),
+            standard: false,
+        },
     ];
 
     let station = Station::new(telemetry_items);
@@ -33,15 +61,42 @@ fn station_can_report_standard_telemetry() {
 #[test]
 fn station_can_report_all_telemetry() {
     let telemetry_items = vec![
-        Field { name: String::from("temperature"), standard: true },
-        Field { name: String::from("humidity"), standard: true },
-        Field { name: String::from("dewPoint"), standard: true },
-        Field { name: String::from("windSpeed"), standard: true },
-        Field { name: String::from("windDirection"), standard: true },
-        Field { name: String::from("dailyParticipation"), standard: false },
-        Field { name: String::from("maxWindSpeed"), standard: false },
-        Field { name: String::from("highTemperature"), standard: false },
-        Field { name: String::from("lowTemperature"), standard: false },
+        Field {
+            name: String::from("temperature"),
+            standard: true,
+        },
+        Field {
+            name: String::from("humidity"),
+            standard: true,
+        },
+        Field {
+            name: String::from("dewPoint"),
+            standard: true,
+        },
+        Field {
+            name: String::from("windSpeed"),
+            standard: true,
+        },
+        Field {
+            name: String::from("windDirection"),
+            standard: true,
+        },
+        Field {
+            name: String::from("dailyParticipation"),
+            standard: false,
+        },
+        Field {
+            name: String::from("maxWindSpeed"),
+            standard: false,
+        },
+        Field {
+            name: String::from("highTemperature"),
+            standard: false,
+        },
+        Field {
+            name: String::from("lowTemperature"),
+            standard: false,
+        },
     ];
 
     let station = Station::new(telemetry_items);
