@@ -81,3 +81,11 @@ fn station_can_report_all_telemetry() {
         ]
     );
 }
+
+#[test]
+fn station_can_get_field_item() {
+    let station = setup_station();
+    let wind_speed = station.get_field("windSpeed");
+
+    assert_eq!(wind_speed, 0);
+}
