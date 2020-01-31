@@ -1,3 +1,6 @@
+mod errors;
+
+use crate::station::errors::*;
 use std::collections::BTreeMap;
 
 #[derive(Debug, PartialEq)]
@@ -27,7 +30,10 @@ impl Station {
             structure.insert(field.name.clone(), field.standard);
             telemetry.insert(field.name, 0);
         }
-        Station { structure, telemetry }
+        Station {
+            structure,
+            telemetry,
+        }
     }
 
     /// Reports the standard telemetry packet as a vector of Strings.
@@ -50,8 +56,21 @@ impl Station {
         all_fields
     }
 
-    /// Allows the reporting of field's current value.
-    pub fn get_field(&self, field: &str) -> u32 {
-        self.telemetry.get(field).unwrap().clone()
+    /// Allows the reporting of a field's current value.
+    pub fn get_field(&self, field: &str) -> StationResult<u32> {
+        match self.telemetry.get(field) {
+            Some(val) => Ok(*val),
+            None => Err(StationError::TelemetryFieldMissing),
+        }
+    }
+
+    /// Allows the setting of a field's current value.
+    pub fn set_field(&mut self, field: &str, val: u32) -> StationResult<()> {
+        if self.telemetry.contains_key(field) {
+            self.telemetry.insert(field.to_string(), val);
+            Ok(())
+        } else {
+            Err(StationError::TelemetryFieldMissing)
+        }
     }
 }
