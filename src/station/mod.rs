@@ -1,4 +1,5 @@
-mod errors;
+/// Errors that can occur during Station operations.
+pub mod errors;
 
 use crate::station::errors::*;
 use std::collections::BTreeMap;
