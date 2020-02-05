@@ -74,4 +74,14 @@ impl Station {
             Err(StationError::TelemetryFieldMissing)
         }
     }
+
+    /// Retrieves all of the values in order from standard telemetry
+    pub fn get_standard(&mut self) -> StationResult<Vec<u32>> {
+        let fields = self.report_standard();
+        let mut values = Vec::new();
+        for field in fields {
+            values.push(self.get_field(&field)?);
+        }
+        Ok(values)
+    }
 }

@@ -93,8 +93,25 @@ fn station_can_get_field_item() {
 #[test]
 fn station_can_set_field_item() {
     let mut station = setup_station();
+
     station.set_field("windSpeed", 15).unwrap();
+
     let wind_speed = station.get_field("windSpeed").unwrap();
 
     assert_eq!(wind_speed, 15);
+}
+
+#[test]
+fn station_can_get_standard_telemetry() {
+    let mut station = setup_station();
+
+    station.set_field("temperature", 60).unwrap();
+    station.set_field("humidity", 30).unwrap();
+    station.set_field("dewPoint", 28).unwrap();
+    station.set_field("windSpeed", 15).unwrap();
+    station.set_field("windDirection", 2).unwrap();
+
+    let standard_telemetry = station.get_standard().unwrap();
+
+    assert_eq!(standard_telemetry, vec![28, 30, 60, 2, 15]);
 }
