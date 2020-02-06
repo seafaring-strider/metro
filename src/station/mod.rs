@@ -75,13 +75,24 @@ impl Station {
         }
     }
 
-    /// Retrieves all of the values in order from standard telemetry
+    /// Retrieves all of the field values in order from standard telemetry.
     pub fn get_standard(&mut self) -> StationResult<Vec<u32>> {
         let fields = self.report_standard();
         let mut values = Vec::new();
-        for field in fields {
-            values.push(self.get_field(&field)?);
+        for (field, value) in &self.telemetry {
+            if fields.contains(field) {
+                values.push(*value);
+            }
         }
         Ok(values)
+    }
+
+    /// Retrieves all field values.
+    pub fn get_all(&mut self) -> Vec<u32> {
+        let mut values = Vec::new();
+        for value in self.telemetry.values() {
+            values.push(*value);
+        }
+        values
     }
 }

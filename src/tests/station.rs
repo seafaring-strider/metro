@@ -25,7 +25,7 @@ fn setup_station() -> Station {
             standard: true,
         },
         Field {
-            name: String::from("dailyParticipation"),
+            name: String::from("dailyPrecipitation"),
             standard: false,
         },
         Field {
@@ -69,7 +69,7 @@ fn station_can_report_all_telemetry() {
     assert_eq!(
         standard,
         vec![
-            String::from("dailyParticipation"),
+            String::from("dailyPrecipitation"),
             String::from("dewPoint"),
             String::from("highTemperature"),
             String::from("humidity"),
@@ -114,4 +114,24 @@ fn station_can_get_standard_telemetry() {
     let standard_telemetry = station.get_standard().unwrap();
 
     assert_eq!(standard_telemetry, vec![28, 30, 60, 2, 15]);
+}
+
+#[test]
+fn station_can_get_all_telemetry() {
+    let mut station = setup_station();
+
+    station.set_field("dewPoint", 28).unwrap();
+    station.set_field("humidity", 30).unwrap();
+    station.set_field("temperature", 60).unwrap();
+    station.set_field("windSpeed", 15).unwrap();
+    station.set_field("windDirection", 2).unwrap();
+
+    station.set_field("dailyPrecipitation", 0).unwrap();
+    station.set_field("highTemperature", 64).unwrap();
+    station.set_field("lowTemperature", 38).unwrap();
+    station.set_field("maxWindSpeed", 32).unwrap();
+
+    let standard_telemetry = station.get_all();
+
+    assert_eq!(standard_telemetry, vec![0, 28, 64, 30, 38, 32, 60, 2, 15]);
 }
